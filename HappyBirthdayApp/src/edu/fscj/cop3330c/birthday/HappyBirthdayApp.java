@@ -16,18 +16,19 @@ import java.util.stream.Stream;
 
 // main application class
 public class HappyBirthdayApp implements BirthdayCardSender {
-    //private User user;
+
+    //singleton
+    private static HappyBirthdayApp happyBirthdayApp = new HappyBirthdayApp();
+
     private ArrayList<User> birthdays = new ArrayList<>();
     // Use a Queue<LinkedList> to act as message queue for the dispatcher
     private Queue<BirthdayCard> queue = new LinkedList<BirthdayCard>();
     private Stream<BirthdayCard> stream = queue.stream();
 
-    private static HappyBirthdayApp hba = new HappyBirthdayApp();
-
     private HappyBirthdayApp() { }
 
-    public static HappyBirthdayApp getApp() {
-        return hba;
+    public static HappyBirthdayApp getHappyBirthdayApp() {
+        return happyBirthdayApp;
     }
 
     // send the card
@@ -60,6 +61,9 @@ public class HappyBirthdayApp implements BirthdayCardSender {
 
     // main program
     public static void main(String[] args) {
+
+        // get singleton
+        HappyBirthdayApp hba = HappyBirthdayApp.getHappyBirthdayApp();
 
         BirthdayCardFactory cardFactory;
 
